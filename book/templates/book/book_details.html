@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block content %}
+
+    book title: {{title}}<br>
+
+    author:
+    {% for author in authors %}
+<!--        {{ author.name }} {{author.surname}},-->
+        <a href="{% url 'author_item' author.id %}"> {{ author.name }} {{author.surname}}</a>,
+    {% endfor %}<br>
+
+    book total : {{count}}<br>
+    available books: <b>{{ amount_left }}</b>
+
+    <br><br><small>DB id: {{id}}</small>
+
+    <br><br><a href="{% url 'delete_book' id %}"> <small><b>Delete book</b></small></a>
+    <br><a href="{% url 'update_book' id %}"> <small><b>Change details</b></small></a>
+
+{% endblock %}

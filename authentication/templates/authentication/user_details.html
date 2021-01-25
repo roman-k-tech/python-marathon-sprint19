@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ name }} {{ surname}}
+{% endblock %}
+
+{% block content %}
+
+
+    user: {{ first_name }} {{ middle_name }} {{ last_name }}<br>
+
+    email: {{ email }}<br>
+
+    role: {{ role }}<br>
+
+    active: {{ is_active }}<br>
+
+    <br>orders:
+    {% if orders %}
+        <table class="table table-hover table-bordered  table-striped">
+            <tr>
+                <td>Book</td>
+                <td>Order creation time</td>
+                <td>Should be returned at</td>
+                <td>Returned at</td>
+            </tr >
+        {% for order in orders %}
+            <tr>
+                <td><a href = "{% url 'book_item' order.book.id %}"> {{ order.book.name }}</a></td>
+                <td>{{ order.created_at }}</td>
+                <td>{{ order.plated_end_at }}</td>
+            {% if order.end_at %}
+                <td>{{ order.end_at }}</td>
+            {% else %}
+                <td><b>Not returned!</b></td>
+            {% endif %}
+            </tr>
+        {% endfor %}
+        </table>
+    {%else%}
+        No orders.
+    {% endif %}
+
+    <br><small>DB id: {{ id }}</small><br>
+
+<a href="/users/delete/{{ id }}/">Delete User</a>
+<br>
+<a href="/users/signup/{{ id }}/">Change details</a>
+
+{% endblock %}

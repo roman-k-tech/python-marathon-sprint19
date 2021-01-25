@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Library
+{% endblock %}
+
+{% block content %}
+    {% if books %}
+        {% for book in books %}
+    <a href="{% url 'book_item' book.id %}"> <small>{{ forloop.counter }}</small>. {{ book.name }} </a>
+            <br>
+        {% endfor %}
+    {% else %}
+        <p>No books!</p>
+    {% endif %}
+
+    <br><a href="{% url 'create_book' %}"> <small><b>Add new book</b></small></a>
+{% endblock %}

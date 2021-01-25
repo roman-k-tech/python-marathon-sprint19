@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    .logg{
+        text-align: right;
+        background: whitesmoke;
+        padding-right: 100px;
+    }
+</style>
+
+</head>
+<body>
+        <div class="logg">
+        {% if user.is_authenticated %}
+        User: {{ user.get_username }}
+        <a href="{% url 'logout'%}?next={{request.path}}">Logout</a>
+        {% else %}
+        <a href="{% url 'login'%}?next={{request.path}}">Login</a>
+        <a href="{% url 'create_user'%}">Sign Up</a>
+        {% endif %}
+        </div>
+    <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+
+        <nav class="my-2 my-md-0 me-md-3">
+            <b>Library</b><br>
+            <a class="p-2" href="{% url 'books' %}"><small>Book List</small></a>
+            <a class="p-2" href="{% url 'authors' %}"><small>Authors</small></a>
+            <a class="p-2" href="{% url 'users' %}"><small>Users</small></a>
+            <a class="p-2" href="{% url 'orders' %}"><small>Orders</small></a>
+
+        </nav>
+
+    </header>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

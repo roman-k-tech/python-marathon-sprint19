@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Author Details
+{% endblock %}
+
+{% block content %}
+    <small><b>Author Details</b></small>
+        <form method = "POST"> {% csrf_token %}
+            <small>author name:</small>
+            {{author.name}}<br>
+            <small>author surname:</small>
+            {{author.surname}}<br>
+            <small>author patronymic:</small>
+            {{author.patronymic}}<br>
+<!--            <small>author books:</small>-->
+<!--            {{author.books}}<br>-->
+            <input type='submit' value='Submit'/>
+            {{ error }}
+        </form>
+{% endblock %}
